@@ -10,4 +10,6 @@ module.exports = () => {
       title: `camiseta ${i + 1}`
     })
   }
+
+  return data;
 }
