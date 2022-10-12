@@ -5,17 +5,15 @@ interface SerachResultsProps {
   results: Array<{
     id: number;
     price: number;
+    priceFormatted: string;
     title: string;
   }>
   onAddToWishlist: (id: number) => void;
+  totalPrice: number;
 }
 
-export function SearchResult({ results, onAddToWishlist }: SerachResultsProps) {
-  const totalPrice = useMemo(() => {
-    return results.reduce((total, product) => {
-      return total + product.price;
-    }, 0)
-  }, [results])
+export function SearchResult({ results, onAddToWishlist, totalPrice }: SerachResultsProps) {
+  
 
   return (
     <div>
