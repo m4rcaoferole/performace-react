@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { ProductItem } from "./ProductItem";
 
 interface SerachResultsProps {
@@ -6,15 +7,27 @@ interface SerachResultsProps {
     price: number;
     title: string;
   }>
+  onAddToWishlist: (id: number) => void;
 }
 
-export function SearchResult({ results }: SerachResultsProps) {
+export function SearchResult({ results, onAddToWishlist }: SerachResultsProps) {
+  const totalPrice = useMemo(() => {
+    return results.reduce((total, product) => {
+      return total + product.price;
+    }, 0)
+  }, [results])
 
   return (
     <div>
+      <h1>{totalPrice}</h1>
+
       {results.map(product => {
         return (
-          <ProductItem product={product} />
+          <ProductItem
+            key={product.id}
+            product={product}
+            onAddToWishlist={onAddToWishlist}
+          />
         );
       })}
     </div>
@@ -26,4 +39,14 @@ export function SearchResult({ results }: SerachResultsProps) {
  * 1. Criar uma nova versão do componente. // memo funciona muito bem nesse primeiro passo.
  * 2. Comparar com a versão anterior.
  * 3. Se houverem alterações, vai atualizar o que alterou.
+ */
+
+/** useMemo
+ * 1. Cálculos pesados
+ * 2. Igualdade referêncial
+ *  (quando a gente repassa aquela informação a um componente filho);
+ 
+ * useCallback
+ * 1. Memorizar um função e não valor.
+ * 
  */

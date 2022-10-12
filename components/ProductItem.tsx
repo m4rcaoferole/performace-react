@@ -6,19 +6,24 @@ interface ProductsProps {
     price: number;
     title: string;
   };
+  onAddToWishlist: (id: number) => void;
 }
-// Perfomando com memo!
-// shallow compare -> comparação rasa => verifica a igualdade dentro das propriedades.
-// {} === {} => false -> igualdade referêncial => Compara se os objetos ocupam o mesmo lugar na memória.
 
-function ProductItemComponent({ product }: ProductsProps) {
+function ProductItemComponent({ product, onAddToWishlist }: ProductsProps) {
   return (
     <div>
       {product.title} - <strong>{product.price}</strong>
+      <button onClick={() => onAddToWishlist(product.id)}>Add to wishlist</button>
     </div>
   );
-}
 
+}
+/* Perfomando com memo!
+* shallow compare -> comparação rasa
+  verifica a igualdade dentro das propriedades.
+* {} === {} => false -> igualdade referêncial
+  Compara se os objetos ocupam o mesmo lugar na memória.
+*/
 export const ProductItem = memo(
   ProductItemComponent,
   (prevProps, nextProps) => {
