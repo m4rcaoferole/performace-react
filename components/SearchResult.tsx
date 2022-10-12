@@ -20,3 +20,10 @@ export function SearchResult({ results }: SerachResultsProps) {
     </div>
   )
 }
+
+/** Fluxo de renderização do React!!!
+  
+ * 1. Criar uma nova versão do componente. // memo funciona muito bem nesse primeiro passo.
+ * 2. Comparar com a versão anterior.
+ * 3. Se houverem alterações, vai atualizar o que alterou.
+ */
